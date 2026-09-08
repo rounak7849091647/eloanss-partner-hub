@@ -4,7 +4,7 @@ import { CtaBanner, SectionHead } from "@/components/site/blocks";
 import { EmiCalculator } from "@/components/site/EmiCalculator";
 import { loans } from "@/data/loans";
 
-export const Route = createFileRoute("/loans")({
+export const Route = createFileRoute("/loans/")({
   head: () => ({
     meta: [
       { title: "Loan Products — Personal, Business, Home & Vehicle | ELOANSS" },
