@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as InvestmentsRouteImport } from './routes/investments'
+import { Route as PartnerRouteImport } from './routes/partner'
+import { Route as InsuranceIndexRouteImport } from './routes/insurance.index'
+import { Route as InsuranceSlugRouteImport } from './routes/insurance.$slug'
+import { Route as LoansIndexRouteImport } from './routes/loans.index'
+import { Route as LoansSlugRouteImport } from './routes/loans.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvestmentsRoute = InvestmentsRouteImport.update({
+  id: '/investments',
+  path: '/investments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerRoute = PartnerRouteImport.update({
+  id: '/partner',
+  path: '/partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsuranceIndexRoute = InsuranceIndexRouteImport.update({
+  id: '/insurance/',
+  path: '/insurance/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsuranceSlugRoute = InsuranceSlugRouteImport.update({
+  id: '/insurance/$slug',
+  path: '/insurance/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoansIndexRoute = LoansIndexRouteImport.update({
+  id: '/loans/',
+  path: '/loans/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoansSlugRoute = LoansSlugRouteImport.update({
+  id: '/loans/$slug',
+  path: '/loans/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/investments': typeof InvestmentsRoute
+  '/partner': typeof PartnerRoute
+  '/insurance/$slug': typeof InsuranceSlugRoute
+  '/loans/$slug': typeof LoansSlugRoute
+  '/insurance/': typeof InsuranceIndexRoute
+  '/loans/': typeof LoansIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/investments': typeof InvestmentsRoute
+  '/partner': typeof PartnerRoute
+  '/insurance/$slug': typeof InsuranceSlugRoute
+  '/loans/$slug': typeof LoansSlugRoute
+  '/insurance': typeof InsuranceIndexRoute
+  '/loans': typeof LoansIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/investments': typeof InvestmentsRoute
+  '/partner': typeof PartnerRoute
+  '/insurance/$slug': typeof InsuranceSlugRoute
+  '/loans/$slug': typeof LoansSlugRoute
+  '/insurance/': typeof InsuranceIndexRoute
+  '/loans/': typeof LoansIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/investments'
+    | '/partner'
+    | '/insurance/$slug'
+    | '/loans/$slug'
+    | '/insurance/'
+    | '/loans/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/investments'
+    | '/partner'
+    | '/insurance/$slug'
+    | '/loans/$slug'
+    | '/insurance'
+    | '/loans'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/investments'
+    | '/partner'
+    | '/insurance/$slug'
+    | '/loans/$slug'
+    | '/insurance/'
+    | '/loans/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  InvestmentsRoute: typeof InvestmentsRoute
+  PartnerRoute: typeof PartnerRoute
+  InsuranceSlugRoute: typeof InsuranceSlugRoute
+  LoansSlugRoute: typeof LoansSlugRoute
+  InsuranceIndexRoute: typeof InsuranceIndexRoute
+  LoansIndexRoute: typeof LoansIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/investments': {
+      id: '/investments'
+      path: '/investments'
+      fullPath: '/investments'
+      preLoaderRoute: typeof InvestmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner': {
+      id: '/partner'
+      path: '/partner'
+      fullPath: '/partner'
+      preLoaderRoute: typeof PartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insurance/': {
+      id: '/insurance/'
+      path: '/insurance'
+      fullPath: '/insurance/'
+      preLoaderRoute: typeof InsuranceIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insurance/$slug': {
+      id: '/insurance/$slug'
+      path: '/insurance/$slug'
+      fullPath: '/insurance/$slug'
+      preLoaderRoute: typeof InsuranceSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/loans/': {
+      id: '/loans/'
+      path: '/loans'
+      fullPath: '/loans/'
+      preLoaderRoute: typeof LoansIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/loans/$slug': {
+      id: '/loans/$slug'
+      path: '/loans/$slug'
+      fullPath: '/loans/$slug'
+      preLoaderRoute: typeof LoansSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  InvestmentsRoute: InvestmentsRoute,
+  PartnerRoute: PartnerRoute,
+  InsuranceSlugRoute: InsuranceSlugRoute,
+  LoansSlugRoute: LoansSlugRoute,
+  InsuranceIndexRoute: InsuranceIndexRoute,
+  LoansIndexRoute: LoansIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
