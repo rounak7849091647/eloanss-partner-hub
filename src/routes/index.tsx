@@ -23,6 +23,7 @@ import { CtaBanner, MapEmbed, SectionHead, Testimonials, TrustBar } from "@/comp
 import { loans } from "@/data/loans";
 import { insurances } from "@/data/insurance";
 import { site, steps } from "@/data/site";
+import { getLoanVisual } from "@/data/loan-visuals";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -108,15 +109,18 @@ function Home() {
             <SectionHead eyebrow="Loan solutions" title="Explore finance for every milestone" text="Compare clear options across personal, property, vehicle and business needs." center={false} />
             <Link to="/loans" className="hidden items-center gap-2 text-sm font-semibold text-gold-dark sm:flex">View all loans <ArrowRight className="h-4 w-4" /></Link>
           </div>
-          <div className="mt-9 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {categories.map((category) => (
-              <Link key={category.slug} to="/loans/$slug" params={{ slug: category.slug }} className="card-soft card-hover group min-h-44 p-4">
-                <span className="grid h-11 w-11 place-items-center rounded-md bg-surface text-navy transition-colors group-hover:bg-navy group-hover:text-primary-foreground"><category.icon className="h-5 w-5" /></span>
-                <h3 className="mt-5 text-sm font-bold text-navy">{category.label}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{category.note}</p>
+              <Link key={category.slug} to="/loans/$slug" params={{ slug: category.slug }} className="card-soft card-hover group overflow-hidden">
+                <div className="relative aspect-[16/8] overflow-hidden">
+                  <img src={getLoanVisual(category.slug).image} alt={getLoanVisual(category.slug).alt} loading="lazy" width={1400} height={900} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+                  <span className="absolute left-3 top-3 grid h-10 w-10 place-items-center rounded-md bg-background/95 text-navy shadow-card"><category.icon className="h-5 w-5" /></span>
+                </div>
+                <div className="p-4"><h3 className="text-sm font-bold text-navy">{category.label}</h3><p className="mt-2 text-xs leading-relaxed text-muted-foreground">{category.note}</p></div>
               </Link>
             ))}
           </div>
+          <div className="mt-7 flex justify-center"><Link to="/loans/compare" className="btn-base btn-outline-navy">Compare loan types <ArrowRight className="h-4 w-4" /></Link></div>
         </div>
       </section>
 
