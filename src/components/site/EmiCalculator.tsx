@@ -4,7 +4,7 @@ import { Link } from "@tanstack/react-router";
 const inr = (n: number) =>
   "₹" + Math.round(n).toLocaleString("en-IN", { maximumFractionDigits: 0 });
 
-export function EmiCalculator() {
+export function EmiCalculator({ compact = false }: { compact?: boolean }) {
   const [amount, setAmount] = useState(1500000);
   const [rate, setRate] = useState(9.5);
   const [years, setYears] = useState(15);
@@ -18,6 +18,22 @@ export function EmiCalculator() {
   }, [amount, rate, years]);
 
   const principalShare = (amount / total) * 100;
+
+  if (compact) {
+    return (
+      <div className="space-y-5">
+        <Field label="Loan Amount" value={inr(amount)} min={50000} max={20000000} step={50000} current={amount} onChange={setAmount} />
+        <Field label="Interest Rate" value={`${rate.toFixed(2)}%`} min={6} max={24} step={0.05} current={rate} onChange={setRate} />
+        <Field label="Tenure" value={`${years} years`} min={1} max={30} step={1} current={years} onChange={setYears} />
+        <div className="rounded-md bg-surface p-4">
+          <p className="text-xs text-muted-foreground">Estimated monthly EMI</p>
+          <p className="mt-1 font-display text-2xl font-bold text-navy">{inr(emi)}</p>
+        </div>
+        <Link to="/contact" className="btn-base btn-gold w-full">Get My Best Offer</Link>
+        <p className="text-center text-[11px] text-muted-foreground">Indicative estimate. Final terms depend on the lender.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="card-soft grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.1fr_0.9fr]">

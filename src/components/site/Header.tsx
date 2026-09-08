@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ChevronDown, Menu, Phone, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Menu, Phone, X } from "lucide-react";
 import { loans } from "@/data/loans";
 import { insurances } from "@/data/insurance";
 import { site } from "@/data/site";
@@ -21,17 +21,17 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/95 backdrop-blur">
-      <div className="container-page flex h-16 items-center justify-between gap-4 lg:h-20">
+      <div className="container-page grid h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:flex lg:h-[72px] lg:justify-between">
         <Link to="/" className="flex shrink-0 items-center gap-2" onClick={() => setOpen(false)}>
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-navy font-display text-lg font-bold text-primary-foreground">
-            e
+          <span className="grid h-10 w-10 place-items-center rounded-md bg-navy font-display text-xl font-bold italic text-gold">
+            E
           </span>
           <span className="min-w-0">
-            <span className="block font-display text-lg font-bold leading-none tracking-tight text-navy">
+            <span className="block font-display text-lg font-bold leading-none text-navy">
               ELOANSS
             </span>
             <span className="hidden text-[11px] font-medium text-muted-foreground sm:block">
-              Loans · Insurance · Investments
+              Finance Today. A Better Tomorrow.
             </span>
           </span>
         </Link>
@@ -70,13 +70,13 @@ export function Header() {
             {site.phone}
           </a>
           <Link to="/contact" className="btn-base btn-gold hidden px-5 py-2.5 text-sm sm:inline-flex">
-            Apply Now
+            Apply Now <ArrowRight className="h-4 w-4" />
           </Link>
           <button
             type="button"
             aria-label="Toggle menu"
             onClick={() => setOpen(!open)}
-            className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-border text-navy lg:hidden"
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-border text-navy lg:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -140,8 +140,8 @@ function NavLink({ to, label }: { to: string; label: string }) {
   return (
     <Link
       to={to}
-      className="whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-medium text-navy/80 transition-colors hover:bg-surface hover:text-navy xl:text-sm"
-      activeProps={{ className: "whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-semibold text-navy bg-surface xl:text-sm" }}
+      className="whitespace-nowrap rounded-md px-2.5 py-2 text-[13px] font-medium text-navy/80 transition-colors hover:bg-surface hover:text-navy xl:text-sm"
+      activeProps={{ className: "whitespace-nowrap rounded-md px-2.5 py-2 text-[13px] font-semibold text-navy bg-surface xl:text-sm" }}
       activeOptions={{ exact: to === "/" }}
     >
       {label}
@@ -174,7 +174,7 @@ function MegaTrigger({
         type="button"
         onClick={onToggle}
         onMouseEnter={() => !active && onToggle()}
-        className="inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-medium xl:text-sm text-navy/80 transition-colors hover:bg-surface hover:text-navy"
+        className="inline-flex items-center gap-1 whitespace-nowrap rounded-md px-2.5 py-2 text-[13px] font-medium xl:text-sm text-navy/80 transition-colors hover:bg-surface hover:text-navy"
       >
         {label}
         <ChevronDown className="h-4 w-4" />
