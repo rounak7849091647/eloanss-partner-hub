@@ -6,4 +6,4 @@
 - [x] Add a dedicated loan comparison page
 - [x] Enrich every loan detail page
 - [x] Improve homepage loan storytelling and links
-- [ ] Verify routes, controls, desktop/mobile visuals, and diagnostics
+- [x] Verify routes, controls, desktop/mobile visuals, and diagnostics
