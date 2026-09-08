@@ -4,7 +4,7 @@ import { CtaBanner, SectionHead } from "@/components/site/blocks";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { insurances } from "@/data/insurance";
 
-export const Route = createFileRoute("/insurance")({
+export const Route = createFileRoute("/insurance/")({
   head: () => ({
     meta: [
       { title: "Insurance — Life, Health, Term, Travel & Vehicle | ELOANSS" },
