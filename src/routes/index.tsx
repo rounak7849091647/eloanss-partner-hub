@@ -44,7 +44,7 @@ const categories = [
   { icon: User, label: "Personal Loan", slug: "personal-loan", note: "For your personal needs" },
   { icon: Briefcase, label: "Business Loan", slug: "business-loan", note: "Fuel your business" },
   { icon: HomeIcon, label: "Home Loan", slug: "home-loan", note: "Turn your dream home real" },
-  { icon: Landmark, label: "Mortgage Loan", slug: "mortgage-loan", note: "Unlock property value" },
+  { icon: Landmark, label: "Mortgage Loan", slug: "home-loan", note: "Unlock property value" },
   { icon: Car, label: "Car Loan", slug: "new-car-loan", note: "Drive your dreams" },
   { icon: Bike, label: "Two-Wheeler", slug: "two-wheeler-loan", note: "Ride towards independence" },
   { icon: Coins, label: "Gold Loan", slug: "gold-loan", note: "Funds when you need them" },
