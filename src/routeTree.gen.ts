@@ -23,6 +23,7 @@ import { Route as InsuranceIndexRouteImport } from './routes/insurance.index'
 import { Route as InsuranceSlugRouteImport } from './routes/insurance.$slug'
 import { Route as LoansIndexRouteImport } from './routes/loans.index'
 import { Route as LoansSlugRouteImport } from './routes/loans.$slug'
+import { Route as LoansCompareRouteImport } from './routes/loans.compare'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -94,6 +95,11 @@ const LoansSlugRoute = LoansSlugRouteImport.update({
   path: '/loans/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoansCompareRoute = LoansCompareRouteImport.update({
+  id: '/loans/compare',
+  path: '/loans/compare',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/insurance/$slug': typeof InsuranceSlugRoute
   '/loans/$slug': typeof LoansSlugRoute
+  '/loans/compare': typeof LoansCompareRoute
   '/insurance/': typeof InsuranceIndexRoute
   '/loans/': typeof LoansIndexRoute
 }
@@ -124,6 +131,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/insurance/$slug': typeof InsuranceSlugRoute
   '/loans/$slug': typeof LoansSlugRoute
+  '/loans/compare': typeof LoansCompareRoute
   '/insurance': typeof InsuranceIndexRoute
   '/loans': typeof LoansIndexRoute
 }
@@ -141,6 +149,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/insurance/$slug': typeof InsuranceSlugRoute
   '/loans/$slug': typeof LoansSlugRoute
+  '/loans/compare': typeof LoansCompareRoute
   '/insurance/': typeof InsuranceIndexRoute
   '/loans/': typeof LoansIndexRoute
 }
@@ -159,6 +168,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/insurance/$slug'
     | '/loans/$slug'
+    | '/loans/compare'
     | '/insurance/'
     | '/loans/'
   fileRoutesByTo: FileRoutesByTo
@@ -175,6 +185,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/insurance/$slug'
     | '/loans/$slug'
+    | '/loans/compare'
     | '/insurance'
     | '/loans'
   id:
@@ -191,6 +202,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/insurance/$slug'
     | '/loans/$slug'
+    | '/loans/compare'
     | '/insurance/'
     | '/loans/'
   fileRoutesById: FileRoutesById
@@ -208,6 +220,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   InsuranceSlugRoute: typeof InsuranceSlugRoute
   LoansSlugRoute: typeof LoansSlugRoute
+  LoansCompareRoute: typeof LoansCompareRoute
   InsuranceIndexRoute: typeof InsuranceIndexRoute
   LoansIndexRoute: typeof LoansIndexRoute
 }
@@ -312,6 +325,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoansSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/loans/compare': {
+      id: '/loans/compare'
+      path: '/loans/compare'
+      fullPath: '/loans/compare'
+      preLoaderRoute: typeof LoansCompareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -328,6 +348,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   InsuranceSlugRoute: InsuranceSlugRoute,
   LoansSlugRoute: LoansSlugRoute,
+  LoansCompareRoute: LoansCompareRoute,
   InsuranceIndexRoute: InsuranceIndexRoute,
   LoansIndexRoute: LoansIndexRoute,
 }

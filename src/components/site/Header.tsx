@@ -93,6 +93,7 @@ export function Header() {
               onToggle={() => setMobileGroup(mobileGroup === "loans" ? null : "loans")}
             >
               <MobileLink to="/loans" label="All Loans" onClick={() => setOpen(false)} />
+              <MobileLink to="/loans/compare" label="Compare Loans" onClick={() => setOpen(false)} />
               {loans.map((l) => (
                 <MobileLink
                   key={l.slug}
