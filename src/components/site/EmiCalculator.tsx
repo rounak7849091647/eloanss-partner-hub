@@ -116,7 +116,6 @@ function Field({
         onChange={(e) => onChange(Number(e.target.value))}
         aria-label={label}
         className="mt-3 h-2 w-full cursor-pointer appearance-none rounded-full bg-surface accent-gold"
-        style={{ accentColor: "var(--gold)" }}
       />
     </div>
   );
