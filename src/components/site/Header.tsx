@@ -247,7 +247,7 @@ function MobileLink({
   return (
     <Link
       to={to}
-      params={params}
+      {...(params ? { params } : {})}
       onClick={onClick}
       className="block rounded-lg px-3 py-2.5 text-[15px] text-navy/85"
     >

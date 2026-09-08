@@ -29,7 +29,7 @@ export function EnquiryForm({
   const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
   const [form, setForm] = useState({
-    interest: defaultInterest ?? interests[0],
+    interest: defaultInterest ?? "Personal Loan",
     amount: "",
     city: "",
     employment: "Salaried",
