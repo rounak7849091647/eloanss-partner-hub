@@ -24,16 +24,16 @@ export function SectionHead({
 
 export function TrustBar() {
   return (
-    <section className="border-y border-border bg-surface py-8">
+    <section className="border-y border-border bg-background py-6">
       <div className="container-page">
-        <div className="grid gap-6 sm:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-3">
           {[
             { big: "Licensed", small: "Loan broker & insurance facilitator" },
             { big: "12,000+", small: "Happy customers across India" },
             { big: "4.8 / 5", small: "Average customer rating" },
           ].map((s, i) => (
             <div key={s.big} className="flex items-center gap-3">
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gold/20 text-gold-dark">
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-gold/20 text-gold-dark">
                 {i === 2 ? <Star className="h-5 w-5" /> : <Check className="h-5 w-5" />}
               </div>
               <div className="min-w-0">
@@ -51,7 +51,7 @@ export function TrustBar() {
             {partnerBanks.map((b) => (
               <span
                 key={b}
-                className="rounded-xl border border-border bg-background px-4 py-2 text-sm font-semibold text-navy/70"
+                className="rounded-md border border-border bg-surface px-4 py-2 text-sm font-semibold text-navy/70"
               >
                 {b}
               </span>

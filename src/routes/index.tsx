@@ -1,43 +1,38 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
+  ArrowRight,
   Banknote,
   Bike,
   Briefcase,
   Building2,
   Car,
+  CheckCircle2,
   Coins,
-  Compass,
   Globe2,
   HeartHandshake,
   Home as HomeIcon,
+  Landmark,
   ShieldCheck,
-  Target,
   TrendingUp,
   User,
 } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import partnerImg from "@/assets/partner.jpg";
 import { EmiCalculator } from "@/components/site/EmiCalculator";
-import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { CtaBanner, MapEmbed, SectionHead, Testimonials, TrustBar } from "@/components/site/blocks";
 import { loans } from "@/data/loans";
+import { insurances } from "@/data/insurance";
 import { site, steps } from "@/data/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ELOANSS — Loans, Insurance & Investments Made Simple" },
-      {
-        name: "description",
-        content:
-          "Compare loan and insurance offers from top banks, NBFCs and insurers. Fast approvals, transparent charges and expert guidance from ELOANSS.",
-      },
-      { property: "og:title", content: "ELOANSS — Loans, Insurance & Investments Made Simple" },
-      {
-        property: "og:description",
-        content: "Compare offers from top banks & NBFCs. Expert guidance. Quick approval.",
-      },
-      { property: "og:url", content: "/" },
+      { title: "ELOANSS — Loans, Insurance & Investments" },
+      { name: "description", content: "Compare loans and insurance from leading banks and insurers with clear guidance from ELOANSS." },
+      { property: "og:title", content: "ELOANSS — Finance Made Simple" },
+      { property: "og:description", content: "Loans, insurance and investments with transparent expert guidance." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
@@ -45,61 +40,62 @@ export const Route = createFileRoute("/")({
 });
 
 const categories = [
-  { icon: User, label: "Personal", slug: "personal-loan" },
-  { icon: Briefcase, label: "Business", slug: "business-loan" },
-  { icon: HomeIcon, label: "Home", slug: "home-loan" },
-  { icon: Car, label: "Vehicle", slug: "new-car-loan" },
-  { icon: Coins, label: "Gold", slug: "gold-loan" },
-  { icon: Bike, label: "Two-Wheeler", slug: "two-wheeler-loan" },
+  { icon: User, label: "Personal Loan", slug: "personal-loan", note: "For your personal needs" },
+  { icon: Briefcase, label: "Business Loan", slug: "business-loan", note: "Fuel your business" },
+  { icon: HomeIcon, label: "Home Loan", slug: "home-loan", note: "Turn your dream home real" },
+  { icon: Landmark, label: "Mortgage Loan", slug: "mortgage-loan", note: "Unlock property value" },
+  { icon: Car, label: "Car Loan", slug: "new-car-loan", note: "Drive your dreams" },
+  { icon: Bike, label: "Two-Wheeler", slug: "two-wheeler-loan", note: "Ride towards independence" },
+  { icon: Coins, label: "Gold Loan", slug: "gold-loan", note: "Funds when you need them" },
+  { icon: Building2, label: "Project Loan", slug: "project-loan", note: "Build with confidence" },
 ];
 
-const featured = ["home-loan", "personal-loan", "business-loan", "gold-loan", "used-car-loan", "overdraft-loan"];
+const featuredSlugs = ["home-loan", "personal-loan", "business-loan", "gold-loan"];
+const featuredLoans = featuredSlugs.flatMap((slug) => {
+  const loan = loans.find((item) => item.slug === slug);
+  return loan ? [loan] : [];
+});
 
 function Home() {
   return (
     <>
-      <section className="relative overflow-hidden bg-navy">
-        <img
-          src={heroImg}
-          alt="ELOANSS advisors guiding a couple through their loan options"
-          width={1600}
-          height={1100}
-          className="absolute inset-0 h-full w-full object-cover opacity-25"
-        />
-        <div className="relative container-page grid gap-10 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-gold">
-              <ShieldCheck className="h-4 w-4" /> Licensed loan & insurance facilitator
-            </span>
-            <h1 className="mt-5 font-display text-4xl font-bold leading-tight text-primary-foreground sm:text-5xl lg:text-[3.4rem]">
-              Get the Best Loan & Insurance Solutions – Fast, Simple & Transparent
+      <section className="relative overflow-hidden bg-surface">
+        <div className="container-page grid min-h-[620px] items-center gap-7 py-10 lg:grid-cols-12 lg:py-12">
+          <div className="relative z-10 lg:col-span-5">
+            <span className="eyebrow"><ShieldCheck className="h-4 w-4" /> Your trusted financial partner</span>
+            <h1 className="mt-5 max-w-2xl font-display text-4xl font-bold leading-[1.15] text-navy sm:text-5xl lg:text-[3.45rem]">
+              Finance made simple. <span className="text-gold-dark">Possibilities made real.</span>
             </h1>
-            <p className="mt-5 max-w-xl text-lg text-primary-foreground/80">
-              Compare offers from top banks & NBFCs | Expert Guidance | Quick Approval
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
+              Loans, insurance and investments in one place—with expert guidance and clear choices at every step.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/loans" className="btn-base btn-gold">
-                Apply for Loan
-              </Link>
-              <Link to="/insurance" className="btn-base btn-outline-light">
-                Get Insurance Quote
-              </Link>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link to="/contact" className="btn-base btn-navy">Start your application <ArrowRight className="h-4 w-4" /></Link>
+              <Link to="/loans" className="btn-base btn-outline-navy">Explore loan options</Link>
             </div>
-            <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-primary-foreground/15 pt-6">
-              {[
-                ["₹500 Cr+", "Loans facilitated"],
-                ["25+", "Partner lenders"],
-                ["48 hrs", "Average sanction"],
-              ].map(([big, small]) => (
-                <div key={big}>
-                  <dt className="font-display text-2xl font-bold text-gold">{big}</dt>
-                  <dd className="text-xs text-primary-foreground/70">{small}</dd>
-                </div>
+            <div className="mt-8 grid grid-cols-2 gap-x-5 gap-y-3 border-t border-border pt-6 text-sm text-navy sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+              {["Wide choice", "Quick process", "Trusted partners", "Expert help"].map((item) => (
+                <span key={item} className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-gold-dark" />{item}</span>
               ))}
-            </dl>
+            </div>
           </div>
-          <div className="animate-in fade-in slide-in-from-bottom-6 duration-700">
-            <EnquiryForm compact title="Check your eligibility free" />
+
+          <div className="relative min-h-[390px] overflow-hidden rounded-lg lg:col-span-4 lg:min-h-[520px]">
+            <img src={heroImg} alt="A family planning their finances with ELOANSS" className="absolute inset-0 h-full w-full object-cover" width={1600} height={1100} />
+            <div className="absolute inset-x-0 bottom-0 bg-navy/85 p-5 text-primary-foreground">
+              <p className="font-display text-lg font-bold">Your goals. Our guidance.</p>
+              <p className="mt-1 text-sm text-primary-foreground/75">Clear support from enquiry to disbursal.</p>
+            </div>
+          </div>
+
+          <div className="relative z-10 lg:col-span-3">
+            <div className="border border-border bg-background p-5 shadow-lift sm:p-6">
+              <div className="flex items-center justify-between gap-3">
+                <div><p className="text-xs font-bold uppercase text-gold-dark">Quick estimate</p><h2 className="mt-1 font-display text-xl font-bold text-navy">Loan calculator</h2></div>
+                <span className="rounded-md bg-surface px-2.5 py-1 text-xs font-semibold text-navy">Free</span>
+              </div>
+              <div className="mt-5"><EmiCalculator compact /></div>
+            </div>
           </div>
         </div>
       </section>
@@ -108,150 +104,104 @@ function Home() {
 
       <section className="section-pad">
         <div className="container-page">
-          <SectionHead
-            eyebrow="Quick categories"
-            title="What would you like to finance today?"
-            text="Pick a category to see rates, eligibility and documents — or tell us your requirement and we'll match the lender."
-          />
-          <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {categories.map((c) => (
-              <Link
-                key={c.label}
-                to="/loans/$slug"
-                params={{ slug: c.slug }}
-                className="card-soft card-hover flex flex-col items-center gap-3 p-6 text-center"
-              >
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-navy/5 text-navy">
-                  <c.icon className="h-7 w-7" />
-                </span>
-                <span className="font-semibold text-navy">{c.label}</span>
+          <div className="flex items-end justify-between gap-5">
+            <SectionHead eyebrow="Loan solutions" title="Explore finance for every milestone" text="Compare clear options across personal, property, vehicle and business needs." center={false} />
+            <Link to="/loans" className="hidden items-center gap-2 text-sm font-semibold text-gold-dark sm:flex">View all loans <ArrowRight className="h-4 w-4" /></Link>
+          </div>
+          <div className="mt-9 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+            {categories.map((category) => (
+              <Link key={category.slug} to="/loans/$slug" params={{ slug: category.slug }} className="card-soft card-hover group min-h-44 p-4">
+                <span className="grid h-11 w-11 place-items-center rounded-md bg-surface text-navy transition-colors group-hover:bg-navy group-hover:text-primary-foreground"><category.icon className="h-5 w-5" /></span>
+                <h3 className="mt-5 text-sm font-bold text-navy">{category.label}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{category.note}</p>
               </Link>
             ))}
-            <Link to="/insurance" className="card-soft card-hover flex flex-col items-center gap-3 bg-navy p-6 text-center sm:col-span-3 lg:col-span-6">
-              <span className="grid h-14 w-14 place-items-center rounded-2xl bg-gold/20 text-gold">
-                <ShieldCheck className="h-7 w-7" />
-              </span>
-              <span className="font-semibold text-primary-foreground">
-                Insurance — life, health, term, travel, property & vehicle
-              </span>
-            </Link>
           </div>
         </div>
       </section>
 
       <section className="section-pad bg-surface">
-        <div className="container-page grid gap-6 lg:grid-cols-2">
-          {[
-            {
-              icon: Compass,
-              label: "Our Vision",
-              text: "To become the most trusted financial partner helping individuals and businesses achieve their goals with the right loan and insurance solutions.",
-            },
-            {
-              icon: Target,
-              label: "Our Mission",
-              text: "We simplify complex financial products, connect customers with the best lenders and insurers, and deliver transparent, fast, and personalized service.",
-            },
-          ].map((v) => (
-            <div key={v.label} className="card-soft p-8">
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gold/20 text-gold-dark">
-                <v.icon className="h-6 w-6" />
-              </span>
-              <h3 className="mt-5 font-display text-2xl font-bold text-navy">{v.label}</h3>
-              <p className="mt-3 text-muted-foreground">{v.text}</p>
+        <div className="container-page grid gap-5 lg:grid-cols-[1.35fr_0.65fr]">
+          <div className="bg-background p-6 sm:p-8">
+            <div className="flex items-end justify-between gap-4">
+              <SectionHead eyebrow="Insurance solutions" title="Protection that fits real life" text="Straightforward cover for the people, places and journeys that matter." center={false} />
+              <Link to="/insurance" className="hidden text-sm font-semibold text-gold-dark sm:block">View all →</Link>
             </div>
-          ))}
+            <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {insurances.slice(0, 7).map((item) => (
+                <Link key={item.slug} to="/insurance/$slug" params={{ slug: item.slug }} className="rounded-md border border-border p-4 transition-colors hover:border-gold">
+                  <ShieldCheck className="h-6 w-6 text-gold-dark" />
+                  <h3 className="mt-3 text-sm font-bold text-navy">{item.name}</h3>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="relative min-h-80 overflow-hidden rounded-lg bg-navy">
+            <img src={heroImg} alt="Family protected with ELOANSS insurance guidance" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-35" />
+            <div className="relative flex h-full flex-col justify-end p-7 text-primary-foreground">
+              <HeartHandshake className="h-9 w-9 text-gold" />
+              <h2 className="mt-5 font-display text-3xl font-bold">Secure what matters.</h2>
+              <p className="mt-3 text-sm text-primary-foreground/75">Plans for your family, health, vehicle and future.</p>
+              <Link to="/insurance" className="btn-base btn-gold mt-6 self-start">Get a free quote <ArrowRight className="h-4 w-4" /></Link>
+            </div>
+          </div>
         </div>
       </section>
 
       <section className="section-pad">
-        <div className="container-page">
-          <SectionHead
-            eyebrow="Featured products"
-            title="Popular loan products this month"
-            text="Indicative rates from our partner lenders. Your final rate depends on income, credit profile and loan size."
-          />
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featured.map((slug) => {
-              const loan = loans.find((l) => l.slug === slug)!;
-              return (
-                <article key={slug} className="card-soft card-hover flex flex-col p-6">
-                  <h3 className="font-display text-xl font-bold text-navy">{loan.name}</h3>
-                  <p className="mt-2 flex-1 text-sm text-muted-foreground">{loan.short}</p>
-                  <dl className="mt-5 space-y-2 border-t border-border pt-4 text-sm">
-                    <div className="flex justify-between gap-3">
-                      <dt className="text-muted-foreground">Interest</dt>
-                      <dd className="font-semibold text-navy">{loan.rate}</dd>
-                    </div>
-                    <div className="flex justify-between gap-3">
-                      <dt className="text-muted-foreground">Amount</dt>
-                      <dd className="font-semibold text-navy">{loan.amount}</dd>
-                    </div>
-                  </dl>
-                  <Link to="/loans/$slug" params={{ slug: loan.slug }} className="btn-base btn-gold mt-6">
-                    Apply Now
-                  </Link>
-                </article>
-              );
-            })}
-          </div>
+        <div className="container-page grid gap-5 lg:grid-cols-2">
+          <article className="relative min-h-96 overflow-hidden rounded-lg bg-navy p-7 text-primary-foreground sm:p-9">
+            <TrendingUp className="h-9 w-9 text-gold" />
+            <p className="mt-8 text-xs font-bold uppercase text-gold">Share markets & investments</p>
+            <h2 className="mt-3 max-w-md font-display text-3xl font-bold">Grow your wealth with patient, informed choices.</h2>
+            <p className="mt-4 max-w-lg text-primary-foreground/70">Explore demat, mutual funds and SIP guidance aligned to your long-term goals.</p>
+            <Link to="/investments" className="btn-base btn-gold mt-7">Explore investments <ArrowRight className="h-4 w-4" /></Link>
+            <div className="absolute bottom-8 right-8 hidden items-end gap-2 opacity-25 sm:flex">
+              {[40, 74, 55, 110, 88, 140, 120].map((height, index) => <span key={index} className="w-5 bg-gold" style={{ height }} />)}
+            </div>
+          </article>
+          <article className="relative min-h-96 overflow-hidden rounded-lg">
+            <img src={partnerImg} alt="ELOANSS business partnership" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-navy/70" />
+            <div className="relative flex h-full flex-col justify-end p-7 text-primary-foreground sm:p-9">
+              <Globe2 className="h-9 w-9 text-gold" />
+              <p className="mt-8 text-xs font-bold uppercase text-gold">Global business opportunities</p>
+              <h2 className="mt-3 font-display text-3xl font-bold">Build your financial services business with us.</h2>
+              <p className="mt-4 text-primary-foreground/75">Join our distributor network with product access, training and support.</p>
+              <Link to="/partner" className="btn-base btn-gold mt-7 self-start">Partner with us <ArrowRight className="h-4 w-4" /></Link>
+            </div>
+          </article>
         </div>
       </section>
 
       <section className="section-pad bg-surface">
         <div className="container-page">
-          <SectionHead
-            eyebrow="EMI calculator"
-            title="Plan your EMI before you apply"
-            text="Move the sliders to see how amount, rate and tenure change your monthly outflow."
-          />
-          <div className="mt-12">
-            <EmiCalculator />
-          </div>
-        </div>
-      </section>
-
-      <section className="section-pad">
-        <div className="container-page">
-          <SectionHead eyebrow="How it works" title="Four simple steps to disbursal" />
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s, i) => (
-              <div key={s.title} className="card-soft card-hover p-6">
-                <span className="font-display text-4xl font-bold text-gold/60">0{i + 1}</span>
-                <h3 className="mt-3 font-display text-lg font-bold text-navy">{s.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{s.text}</p>
+          <SectionHead eyebrow="Your financial journey" title="A clear path from enquiry to disbursal" text="Simple steps, timely updates and personal support throughout." />
+          <div className="mt-10 grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step, index) => (
+              <div key={step.title} className="bg-background p-6">
+                <span className="text-xs font-bold text-gold-dark">0{index + 1}</span>
+                <h3 className="mt-5 font-display text-lg font-bold text-navy">{step.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{step.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="pb-4">
+      <section className="section-pad">
         <div className="container-page">
-          <div className="card-soft grid items-center gap-8 overflow-hidden bg-navy p-0 lg:grid-cols-2">
-            <img
-              src={partnerImg}
-              alt="ELOANSS distributor partnership handshake"
-              loading="lazy"
-              width={1400}
-              height={900}
-              className="h-full w-full object-cover"
-            />
-            <div className="p-8 lg:p-10">
-              <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gold">
-                <Globe2 className="h-4 w-4" /> Global distributor programme
-              </span>
-              <h2 className="mt-4 font-display text-3xl font-bold text-primary-foreground">
-                Want to become our Global Distributor?
-              </h2>
-              <p className="mt-3 text-primary-foreground/75">
-                Partner with ELOANSS and grow your financial business with our lender network, training and
-                payout support.
-              </p>
-              <Link to="/partner" className="btn-base btn-gold mt-7">
-                Become a Partner
-              </Link>
-            </div>
+          <SectionHead eyebrow="Popular products" title="Frequently chosen finance options" text="Indicative terms only—your final offer depends on lender assessment." />
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {featuredLoans.map((loan) => (
+              <article key={loan.slug} className="card-soft card-hover flex flex-col p-5">
+                <Banknote className="h-6 w-6 text-gold-dark" />
+                <h3 className="mt-4 font-display text-lg font-bold text-navy">{loan.name}</h3>
+                <p className="mt-2 flex-1 text-sm text-muted-foreground">{loan.short}</p>
+                <div className="mt-5 border-t border-border pt-4 text-sm"><span className="text-muted-foreground">Indicative interest</span><strong className="mt-1 block text-navy">{loan.rate}</strong></div>
+                <Link to="/loans/$slug" params={{ slug: loan.slug }} className="mt-5 flex items-center gap-2 text-sm font-semibold text-gold-dark">View details <ArrowRight className="h-4 w-4" /></Link>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -259,61 +209,21 @@ function Home() {
       <Testimonials />
 
       <section className="section-pad">
-        <div className="container-page">
-          <SectionHead
-            eyebrow="Visit or write to us"
-            title="Talk to an advisor near you"
-            text="Drop into our office or send your requirement — we respond within one working day."
-          />
-          <div className="mt-12 grid gap-8 lg:grid-cols-2">
-            <div className="space-y-6">
-              <div className="card-soft p-6">
-                <h3 className="font-display text-lg font-bold text-navy">Head Office</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{site.address}</p>
-                <p className="mt-3 text-sm text-navy">
-                  <a href={site.phoneHref} className="font-semibold">
-                    {site.phone}
-                  </a>{" "}
-                  ·{" "}
-                  <a href={`mailto:${site.email}`} className="font-semibold">
-                    {site.email}
-                  </a>
-                </p>
-                <p className="mt-2 text-sm text-muted-foreground">{site.hours}</p>
-              </div>
-              <MapEmbed />
-            </div>
-            <EnquiryForm title="Send us your requirement" />
+        <div className="container-page grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="bg-surface p-7 sm:p-9">
+            <p className="eyebrow">Visit or write to us</p>
+            <h2 className="mt-3 font-display text-3xl font-bold text-navy">Talk to an ELOANSS advisor</h2>
+            <p className="mt-5 text-muted-foreground">{site.address}</p>
+            <a href={site.phoneHref} className="mt-5 block font-semibold text-navy">{site.phone}</a>
+            <a href={`mailto:${site.email}`} className="mt-2 block font-semibold text-gold-dark">{site.email}</a>
+            <p className="mt-5 text-sm text-muted-foreground">{site.hours}</p>
+            <Link to="/contact" className="btn-base btn-navy mt-7">Send your requirement <ArrowRight className="h-4 w-4" /></Link>
           </div>
+          <MapEmbed className="rounded-lg" />
         </div>
       </section>
 
-      <section className="section-pad bg-surface">
-        <div className="container-page grid gap-6 sm:grid-cols-3">
-          {[
-            { icon: TrendingUp, t: "Share Markets", d: "Demat, mutual funds and SIP guidance for long-term wealth.", to: "/investments" },
-            { icon: HeartHandshake, t: "Insurance", d: "Right-sized cover for life, health, property and vehicles.", to: "/insurance" },
-            { icon: Banknote, t: "All Loans", d: "Twelve loan products across personal, business and vehicle.", to: "/loans" },
-          ].map((c) => (
-            <Link key={c.t} to={c.to} className="card-soft card-hover p-6">
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-navy/5 text-navy">
-                <c.icon className="h-6 w-6" />
-              </span>
-              <h3 className="mt-4 font-display text-lg font-bold text-navy">{c.t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{c.d}</p>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <CtaBanner />
-
-      <section className="border-t border-border py-10">
-        <div className="container-page flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
-          <Building2 className="h-5 w-5 text-gold-dark" />
-          <span>ELOANSS is a facilitator. Sanction, rate and insurance terms rest with the lender or insurer.</span>
-        </div>
-      </section>
+      <CtaBanner title="Bigger dreams. Brighter tomorrows." text="Let ELOANSS be part of your journey with clear, expert-guided financial choices." />
     </>
   );
 }
