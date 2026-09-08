@@ -140,8 +140,8 @@ function NavLink({ to, label }: { to: string; label: string }) {
   return (
     <Link
       to={to}
-      className="rounded-full px-3 py-2 text-sm font-medium text-navy/80 transition-colors hover:bg-surface hover:text-navy"
-      activeProps={{ className: "rounded-full px-3 py-2 text-sm font-semibold text-navy bg-surface" }}
+      className="whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-medium text-navy/80 transition-colors hover:bg-surface hover:text-navy xl:text-sm"
+      activeProps={{ className: "whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-semibold text-navy bg-surface xl:text-sm" }}
       activeOptions={{ exact: to === "/" }}
     >
       {label}
@@ -174,7 +174,7 @@ function MegaTrigger({
         type="button"
         onClick={onToggle}
         onMouseEnter={() => !active && onToggle()}
-        className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-navy/80 transition-colors hover:bg-surface hover:text-navy"
+        className="inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-medium xl:text-sm text-navy/80 transition-colors hover:bg-surface hover:text-navy"
       >
         {label}
         <ChevronDown className="h-4 w-4" />
@@ -247,7 +247,7 @@ function MobileLink({
   return (
     <Link
       to={to}
-      params={params}
+      {...(params ? { params } : {})}
       onClick={onClick}
       className="block rounded-lg px-3 py-2.5 text-[15px] text-navy/85"
     >

@@ -62,7 +62,7 @@ function HowItWorks() {
                 <p className="mt-2 text-muted-foreground">{s.text}</p>
               </div>
               <ul className="space-y-2">
-                {detail[i].map((d) => (
+                {(detail[i] ?? []).map((d) => (
                   <li key={d} className="flex gap-3 text-sm text-navy/85">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold-dark" />
                     {d}
